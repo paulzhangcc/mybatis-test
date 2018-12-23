@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhijiansihang.gen.dao.UserDAO">
+  <resultMap id="BaseResultMap" type="com.zhijiansihang.gen.dao.po.User">
+    <id column="user_id" jdbcType="BIGINT" property="userId" />
+    <result column="mobile" jdbcType="VARCHAR" property="mobile" />
+    <result column="real_name" jdbcType="VARCHAR" property="realName" />
+    <result column="id_card" jdbcType="VARCHAR" property="idCard" />
+    <result column="nick_name" jdbcType="VARCHAR" property="nickName" />
+    <result column="passwd" jdbcType="VARCHAR" property="passwd" />
+    <result column="is_name_auth" jdbcType="TINYINT" property="isNameAuth" />
+    <result column="is_frozen" jdbcType="TINYINT" property="isFrozen" />
+    <result column="is_register_jg" jdbcType="TINYINT" property="isRegisterJg" />
+    <result column="logo" jdbcType="VARCHAR" property="logo" />
+    <result column="roles" jdbcType="SMALLINT" property="roles" />
+    <result column="source" jdbcType="SMALLINT" property="source" />
+    <result column="institution_user_id" jdbcType="BIGINT" property="institutionUserId" />
+    <result column="institution_name" jdbcType="VARCHAR" property="institutionName" />
+    <result column="risk_assessment_level" jdbcType="SMALLINT" property="riskAssessmentLevel" />
+    <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    user_id, mobile, real_name, id_card, nick_name, passwd, is_name_auth, is_frozen, 
+    is_register_jg, logo, roles, `source`, institution_user_id, institution_name, risk_assessment_level, 
+    update_time, create_time
+  </sql>
+  <select id="selectByExample" parameterType="com.zhijiansihang.gen.dao.po.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <insert id="insertSelective" parameterType="com.zhijiansihang.gen.dao.po.User">
+    <selectKey keyProperty="userId" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="mobile != null">
+        mobile,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="idCard != null">
+        id_card,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="passwd != null">
+        passwd,
+      </if>
+      <if test="isNameAuth != null">
+        is_name_auth,
+      </if>
+      <if test="isFrozen != null">
+        is_frozen,
+      </if>
+      <if test="isRegisterJg != null">
+        is_register_jg,
+      </if>
+      <if test="logo != null">
+        logo,
+      </if>
+      <if test="roles != null">
+        roles,
+      </if>
+      <if test="source != null">
+        `source`,
+      </if>
+      <if test="institutionUserId != null">
+        institution_user_id,
+      </if>
+      <if test="institutionName != null">
+        institution_name,
+      </if>
+      <if test="riskAssessmentLevel != null">
+        risk_assessment_level,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="mobile != null">
+        #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null">
+        #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="isNameAuth != null">
+        #{isNameAuth,jdbcType=TINYINT},
+      </if>
+      <if test="isFrozen != null">
+        #{isFrozen,jdbcType=TINYINT},
+      </if>
+      <if test="isRegisterJg != null">
+        #{isRegisterJg,jdbcType=TINYINT},
+      </if>
+      <if test="logo != null">
+        #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="roles != null">
+        #{roles,jdbcType=SMALLINT},
+      </if>
+      <if test="source != null">
+        #{source,jdbcType=SMALLINT},
+      </if>
+      <if test="institutionUserId != null">
+        #{institutionUserId,jdbcType=BIGINT},
+      </if>
+      <if test="institutionName != null">
+        #{institutionName,jdbcType=VARCHAR},
+      </if>
+      <if test="riskAssessmentLevel != null">
+        #{riskAssessmentLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zhijiansihang.gen.dao.po.UserExample" resultType="java.lang.Long">
+    select count(*) from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zhijiansihang.gen.dao.po.User">
+    update user
+    <set>
+      <if test="mobile != null">
+        mobile = #{mobile,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="idCard != null">
+        id_card = #{idCard,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="passwd != null">
+        passwd = #{passwd,jdbcType=VARCHAR},
+      </if>
+      <if test="isNameAuth != null">
+        is_name_auth = #{isNameAuth,jdbcType=TINYINT},
+      </if>
+      <if test="isFrozen != null">
+        is_frozen = #{isFrozen,jdbcType=TINYINT},
+      </if>
+      <if test="isRegisterJg != null">
+        is_register_jg = #{isRegisterJg,jdbcType=TINYINT},
+      </if>
+      <if test="logo != null">
+        logo = #{logo,jdbcType=VARCHAR},
+      </if>
+      <if test="roles != null">
+        roles = #{roles,jdbcType=SMALLINT},
+      </if>
+      <if test="source != null">
+        `source` = #{source,jdbcType=SMALLINT},
+      </if>
+      <if test="institutionUserId != null">
+        institution_user_id = #{institutionUserId,jdbcType=BIGINT},
+      </if>
+      <if test="institutionName != null">
+        institution_name = #{institutionName,jdbcType=VARCHAR},
+      </if>
+      <if test="riskAssessmentLevel != null">
+        risk_assessment_level = #{riskAssessmentLevel,jdbcType=SMALLINT},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=BIGINT}
+  </update>
+  <select id="selectByExampleWithRowbounds" parameterType="com.zhijiansihang.gen.dao.po.UserExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from user
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+</mapper>
